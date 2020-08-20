@@ -9,6 +9,8 @@ import requests
 
 
 def main(device="", threshold=0):
+    mail_last_send = None
+    alert = False
     if device == "" and threshold == 0:
         conf = configparser.ConfigParser()
         conf.read('conf.ini')
@@ -40,8 +42,6 @@ def main(device="", threshold=0):
 
         else:
             alert = False
-
-    mail_last_send = None
 
     while True:
         old_info = check_device(psutil.net_io_counters(pernic=True), device)
